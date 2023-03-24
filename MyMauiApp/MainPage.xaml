@@ -1,0 +1,71 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MyMauiApp.MainPage"
+             xmlns:local="clr-namespace:MyMauiApp.ViewModels">
+
+    <ContentPage.BindingContext>
+        <local:MainViewModel/>
+    </ContentPage.BindingContext>
+
+    <ScrollView>
+
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition/>
+                <RowDefinition Height="100"/>
+                <RowDefinition />
+                <RowDefinition />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            <Entry x:Name="entry" Grid.Row="0" 
+                   Text="{Binding SendContent}"
+                       HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            <Button x:Name="SendBtn" Grid.Row="0" Grid.Column="1"
+                Text="Send"
+                Command="{Binding SendClickCommand}"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"
+                HeightRequest="50"
+                WidthRequest="100"/>
+
+            <Editor x:Name="editor" Grid.Row="1" Grid.ColumnSpan="1"
+                    Text="{Binding ReceiveMessage}"
+                    HorizontalOptions="Start"
+                    VerticalOptions="Start"/>
+
+            <Button x:Name="GetSendBtn" Grid.Row="2" Grid.ColumnSpan="2"
+                    Command="{Binding GetJsonClickCommand}"
+                    Text="GET   JSON"
+                    WidthRequest="100"
+                    HeightRequest="50"
+                    HorizontalOptions="Center"
+                    VerticalOptions="Center"/>
+            
+            <!--集合控件-->
+            <CollectionView ItemsSource="{Binding Users}" Grid.Row="3" Grid.ColumnSpan="3">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                                <ColumnDefinition/>
+                            </Grid.ColumnDefinitions>
+                            <Label Text="{Binding Id}" Grid.Column="0" VerticalOptions="Center"/>
+                            <Label Text="{Binding Name}" Grid.Column="1" VerticalOptions="Center"/>
+                            <Label Text="{Binding City}" Grid.Column="2" VerticalOptions="Center"/>
+                        </Grid>
+                    </DataTemplate>
+                </CollectionView.ItemTemplate>
+            </CollectionView>
+
+        </Grid>
+
+    </ScrollView>
+
+</ContentPage>
